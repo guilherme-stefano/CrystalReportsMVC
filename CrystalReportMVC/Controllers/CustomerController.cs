@@ -40,6 +40,25 @@ namespace CrystalReportMVC.Controllers
             return File(stream, "application/pdf", "CustomerList.pdf");
         }
 
+        public ActionResult ExportCustomersFromDB()
+        {
+            List<Customers> allCustomer = new List<Customers>();
+            allCustomer = context.Customers.ToList();
+            var customerModel = Mapper.Map<IEnumerable<CustomersReportViewModel>>(allCustomer);
+            ReportDocument rd = new ReportDocument();
+            var combined = Path.Combine(Server.MapPath("~/CrystalReports"), "ReportFromDB.rpt");
+            rd.Load(combined);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+
+            return File(stream, "application/pdf", "CustomerList.pdf");
+        }
+
 
 
 
