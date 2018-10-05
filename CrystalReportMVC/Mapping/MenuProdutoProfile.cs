@@ -7,11 +7,11 @@ using System.Web;
 
 namespace CrystalReportMVC.Mapping
 {
-    public class CustomerProfile : Profile
+    public class MenuProdutoProfile : Profile
     {
-        public CustomerProfile()
+        public MenuProdutoProfile()
         {
-            CreateMap<CustomerReportViewModel, Customer>().ReverseMap();
+            CreateMap<MenuProdutoReportViewModel, MenuProduto>().ReverseMap();
         }
     }
 }

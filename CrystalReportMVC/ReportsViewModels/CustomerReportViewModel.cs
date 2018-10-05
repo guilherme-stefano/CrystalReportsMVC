@@ -5,13 +5,14 @@ using System.Web;
 
 namespace CrystalReportMVC.ReportsViewModels
 {
-    public class CustomersReportViewModel
+    public class CustomerReportViewModel
     {
-        public int CustomerID { get; set; }
+        public int id { get; set; }
         public string CustomerName { get; set; }
         public string CustomerEmail { get; set; }
         public int CustomerZipCode { get; set; }
         public string CustomerCountry { get; set; }
         public string CustomerCity { get; set; }
+        public ICollection<CustomerMenuReportViewModel> CustomerMenu { get; set; }
     }
 }

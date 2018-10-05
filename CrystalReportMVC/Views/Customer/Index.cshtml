@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CrystalReportMVC.Customers>
+﻿@model IEnumerable<CrystalReportMVC.Customer>
 
 @{
     ViewBag.Title = "Index";
@@ -18,7 +18,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CustomerID)
+            @Html.DisplayNameFor(model => model.id)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CustomerName)
@@ -42,7 +42,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.CustomerID)
+                @Html.DisplayFor(modelItem => item.id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CustomerName)

@@ -15,15 +15,15 @@ namespace CrystalReportMVC.Controllers
         private CustomerDBEntities context = new CustomerDBEntities();
         public ActionResult Index()
         {
-            var customerList = context.Customers.ToList();
+            var customerList = context.Customer.ToList();
             return View(customerList);
         }
 
         public ActionResult ExportCustomers()
         {
-            List<Customers> allCustomer = new List<Customers>();
-            allCustomer = context.Customers.ToList();
-            var customerModel = Mapper.Map<IEnumerable<CustomersReportViewModel>>(allCustomer);
+            List<Customer> allCustomer = new List<Customer>();
+            allCustomer = context.Customer.ToList();
+            var customerModel = Mapper.Map<IEnumerable<CustomerReportViewModel>>(allCustomer);
             ReportDocument rd = new ReportDocument();
             var combined = Path.Combine(Server.MapPath("~/CrystalReports"), "Customer.rpt");
             rd.Load(combined);
@@ -37,14 +37,17 @@ namespace CrystalReportMVC.Controllers
             Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
             stream.Seek(0, SeekOrigin.Begin);
 
+            rd.Close();
+            rd.Dispose();
+
             return File(stream, "application/pdf", "CustomerList.pdf");
         }
 
         public ActionResult ExportCustomersFromDB()
         {
-            List<Customers> allCustomer = new List<Customers>();
-            allCustomer = context.Customers.ToList();
-            var customerModel = Mapper.Map<IEnumerable<CustomersReportViewModel>>(allCustomer);
+            List<Customer> allCustomer = new List<Customer>();
+            allCustomer = context.Customer.ToList();
+            var customerModel = Mapper.Map<IEnumerable<CustomerReportViewModel>>(allCustomer);
             ReportDocument rd = new ReportDocument();
             var combined = Path.Combine(Server.MapPath("~/CrystalReports"), "ReportFromDB.rpt");
             rd.Load(combined);
@@ -59,8 +62,57 @@ namespace CrystalReportMVC.Controllers
             return File(stream, "application/pdf", "CustomerList.pdf");
         }
 
+       public ActionResult ExportMenuByCustomer()
+        {
+            List<Customer> allCustomer = new List<Customer>();
+            allCustomer = context.Customer.ToList();
+            var customerModel = Mapper.Map<IEnumerable<CustomerReportViewModel>>(allCustomer);
 
+            List<CustomerByMenuViewModel> customerByMenuReport = new List<CustomerByMenuViewModel>();
 
+            foreach (var customer in customerModel)
+            {
+            
+                foreach(var customerMenu in customer.CustomerMenu)
+                {
+                    var menu = customerMenu.Menu;
+                 
+
+                    foreach(var produtoMenu in menu.MenuProduto)
+                    {
+                        var produto = produtoMenu.Produto;
+                        CustomerByMenuViewModel customerReport = new CustomerByMenuViewModel();
+                        customerReport.CustomerName = customer.CustomerName;
+                        customerReport.IdCustomer = customer.id;
+                        customerReport.IdMenu = menu.id;
+                        customerReport.dia = menu.dia;
+                        customerReport.ProductName = produto.Nome;
+                        customerReport.IdProduct = produto.id;
+                        customerByMenuReport.Add(customerReport);
+                    }
+
+                }
+
+            }
+
+            ReportDocument rd = new ReportDocument();
+            var combined = Path.Combine(Server.MapPath("~/CrystalReports"), "CustomerByMenu.rpt");
+            rd.Load(combined);
+
+            rd.SetDataSource(customerByMenuReport);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+
+            rd.Close();
+            rd.Dispose();
+
+            return File(stream, "application/pdf", "MenuByCustomer.pdf");
+        }
 
     }
 }

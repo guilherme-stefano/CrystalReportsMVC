@@ -168,19 +168,38 @@
       <DependentUpon>Customer.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CrystalReports\CustomerByMenu.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomerByMenu.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CrystalReports\ReportFromDB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportFromDB.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Customers.cs">
+    <Compile Include="Customer.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerMenu.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mapping\CustomerMenuProfile.cs" />
     <Compile Include="Mapping\CustomerProfile.cs" />
+    <Compile Include="Mapping\MenuProdutoProfile.cs" />
+    <Compile Include="Mapping\MenuProfile.cs" />
+    <Compile Include="Mapping\ProdutoProfile.cs" />
+    <Compile Include="Menu.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MenuProduto.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -196,8 +215,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Produto.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportsViewModels\CustomerByMenuViewModel.cs" />
+    <Compile Include="ReportsViewModels\CustomerMenuReportViewModel.cs" />
     <Compile Include="ReportsViewModels\CustomerReportViewModel.cs" />
+    <Compile Include="ReportsViewModels\MenuProdutoReportViewModel.cs" />
+    <Compile Include="ReportsViewModels\MenuReportViewModel.cs" />
+    <Compile Include="ReportsViewModels\ProdutoReportViewModel.cs" />
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -280,6 +310,10 @@
     <EmbeddedResource Include="CrystalReports\Customer.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Customer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrystalReports\CustomerByMenu.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CustomerByMenu.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="CrystalReports\ReportFromDB.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

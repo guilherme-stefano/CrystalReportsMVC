@@ -4,55 +4,325 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CustomerDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Customers">
+    <Schema Namespace="CustomerDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
           <Key>
-            <PropertyRef Name="CustomerID" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
           <Property Name="CustomerName" Type="varchar" MaxLength="50" />
           <Property Name="CustomerEmail" Type="varchar" MaxLength="50" />
           <Property Name="CustomerZipCode" Type="int" />
           <Property Name="CustomerCountry" Type="varchar" MaxLength="50" />
           <Property Name="CustomerCity" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="CustomerMenu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="idCustomer" Type="int" />
+          <Property Name="idMenu" Type="int" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dia" Type="int" />
+        </EntityType>
+        <EntityType Name="MenuProduto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdMenu" Type="int" Nullable="false" />
+          <Property Name="IdProduto" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_CustomerMenu_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="CustomerMenu" Type="Self.CustomerMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CustomerMenu">
+              <PropertyRef Name="idCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerMenu_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="CustomerMenu" Type="Self.CustomerMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CustomerMenu">
+              <PropertyRef Name="idMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuProduto_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="MenuProduto" Type="Self.MenuProduto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MenuProduto">
+              <PropertyRef Name="IdMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuProduto_Produto">
+          <End Role="Produto" Type="Self.Produto" Multiplicity="1" />
+          <End Role="MenuProduto" Type="Self.MenuProduto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MenuProduto">
+              <PropertyRef Name="IdProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="CustomerDBModelStoreContainer">
-          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerMenu" EntityType="Self.CustomerMenu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuProduto" EntityType="Self.MenuProduto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produto" EntityType="Self.Produto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CustomerMenu_Customer" Association="Self.FK_CustomerMenu_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="CustomerMenu" EntitySet="CustomerMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerMenu_Menu" Association="Self.FK_CustomerMenu_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="CustomerMenu" EntitySet="CustomerMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuProduto_Menu" Association="Self.FK_MenuProduto_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="MenuProduto" EntitySet="MenuProduto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuProduto_Produto" Association="Self.FK_MenuProduto_Produto">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="MenuProduto" EntitySet="MenuProduto" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CustomerDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Customers">
+        <EntityContainer Name="CustomerDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customer" EntityType="CustomerDBModel.Customer" />
+          <EntitySet Name="CustomerMenu" EntityType="CustomerDBModel.CustomerMenu" />
+          <EntitySet Name="Menu" EntityType="CustomerDBModel.Menu" />
+          <EntitySet Name="MenuProduto" EntityType="CustomerDBModel.MenuProduto" />
+          <EntitySet Name="Produto" EntityType="CustomerDBModel.Produto" />
+          <EntitySet Name="sysdiagrams" EntityType="CustomerDBModel.sysdiagrams" />
+          <AssociationSet Name="FK_CustomerMenu_Customer" Association="CustomerDBModel.FK_CustomerMenu_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="CustomerMenu" EntitySet="CustomerMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerMenu_Menu" Association="CustomerDBModel.FK_CustomerMenu_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="CustomerMenu" EntitySet="CustomerMenu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuProduto_Menu" Association="CustomerDBModel.FK_MenuProduto_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="MenuProduto" EntitySet="MenuProduto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuProduto_Produto" Association="CustomerDBModel.FK_MenuProduto_Produto">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="MenuProduto" EntitySet="MenuProduto" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customer">
           <Key>
-            <PropertyRef Name="CustomerID" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CustomerEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CustomerZipCode" Type="Int32" />
           <Property Name="CustomerCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CustomerCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CustomerMenu" Relationship="CustomerDBModel.FK_CustomerMenu_Customer" FromRole="Customer" ToRole="CustomerMenu" />
         </EntityType>
-        <EntityContainer Name="CustomerDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Customers" EntityType="Self.Customers" />
-        </EntityContainer>
-      </Schema>
+        <EntityType Name="CustomerMenu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="idCustomer" Type="Int32" />
+          <Property Name="idMenu" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="CustomerDBModel.FK_CustomerMenu_Customer" FromRole="CustomerMenu" ToRole="Customer" />
+          <NavigationProperty Name="Menu" Relationship="CustomerDBModel.FK_CustomerMenu_Menu" FromRole="CustomerMenu" ToRole="Menu" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dia" Type="Int32" />
+          <NavigationProperty Name="CustomerMenu" Relationship="CustomerDBModel.FK_CustomerMenu_Menu" FromRole="Menu" ToRole="CustomerMenu" />
+          <NavigationProperty Name="MenuProduto" Relationship="CustomerDBModel.FK_MenuProduto_Menu" FromRole="Menu" ToRole="MenuProduto" />
+        </EntityType>
+        <EntityType Name="MenuProduto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdMenu" Type="Int32" Nullable="false" />
+          <Property Name="IdProduto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Menu" Relationship="CustomerDBModel.FK_MenuProduto_Menu" FromRole="MenuProduto" ToRole="Menu" />
+          <NavigationProperty Name="Produto" Relationship="CustomerDBModel.FK_MenuProduto_Produto" FromRole="MenuProduto" ToRole="Produto" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MenuProduto" Relationship="CustomerDBModel.FK_MenuProduto_Produto" FromRole="Produto" ToRole="MenuProduto" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_CustomerMenu_Customer">
+          <End Type="CustomerDBModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="CustomerDBModel.CustomerMenu" Role="CustomerMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CustomerMenu">
+              <PropertyRef Name="idCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerMenu_Menu">
+          <End Type="CustomerDBModel.Menu" Role="Menu" Multiplicity="0..1" />
+          <End Type="CustomerDBModel.CustomerMenu" Role="CustomerMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CustomerMenu">
+              <PropertyRef Name="idMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuProduto_Menu">
+          <End Type="CustomerDBModel.Menu" Role="Menu" Multiplicity="1" />
+          <End Type="CustomerDBModel.MenuProduto" Role="MenuProduto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MenuProduto">
+              <PropertyRef Name="IdMenu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuProduto_Produto">
+          <End Type="CustomerDBModel.Produto" Role="Produto" Multiplicity="1" />
+          <End Type="CustomerDBModel.MenuProduto" Role="MenuProduto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MenuProduto">
+              <PropertyRef Name="IdProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="CustomerDBModelStoreContainer" CdmEntityContainer="CustomerDBEntities">
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="CustomerDBModel.Customers">
-              <MappingFragment StoreEntitySet="Customers">
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-                <ScalarProperty Name="CustomerEmail" ColumnName="CustomerEmail" />
-                <ScalarProperty Name="CustomerZipCode" ColumnName="CustomerZipCode" />
-                <ScalarProperty Name="CustomerCountry" ColumnName="CustomerCountry" />
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="CustomerDBModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
                 <ScalarProperty Name="CustomerCity" ColumnName="CustomerCity" />
+                <ScalarProperty Name="CustomerCountry" ColumnName="CustomerCountry" />
+                <ScalarProperty Name="CustomerZipCode" ColumnName="CustomerZipCode" />
+                <ScalarProperty Name="CustomerEmail" ColumnName="CustomerEmail" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerMenu">
+            <EntityTypeMapping TypeName="CustomerDBModel.CustomerMenu">
+              <MappingFragment StoreEntitySet="CustomerMenu">
+                <ScalarProperty Name="idMenu" ColumnName="idMenu" />
+                <ScalarProperty Name="idCustomer" ColumnName="idCustomer" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu">
+            <EntityTypeMapping TypeName="CustomerDBModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="dia" ColumnName="dia" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuProduto">
+            <EntityTypeMapping TypeName="CustomerDBModel.MenuProduto">
+              <MappingFragment StoreEntitySet="MenuProduto">
+                <ScalarProperty Name="IdProduto" ColumnName="IdProduto" />
+                <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produto">
+            <EntityTypeMapping TypeName="CustomerDBModel.Produto">
+              <MappingFragment StoreEntitySet="Produto">
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CustomerDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

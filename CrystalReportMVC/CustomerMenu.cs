@@ -12,13 +12,13 @@ namespace CrystalReportMVC
     using System;
     using System.Collections.Generic;
     
-    public partial class Customers
+    public partial class CustomerMenu
     {
-        public int CustomerID { get; set; }
-        public string CustomerName { get; set; }
-        public string CustomerEmail { get; set; }
-        public Nullable<int> CustomerZipCode { get; set; }
-        public string CustomerCountry { get; set; }
-        public string CustomerCity { get; set; }
+        public int id { get; set; }
+        public Nullable<int> idCustomer { get; set; }
+        public Nullable<int> idMenu { get; set; }
+    
+        public virtual Customer Customer { get; set; }
+        public virtual Menu Menu { get; set; }
     }
 }
