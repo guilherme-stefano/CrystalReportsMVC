@@ -5,9 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f46ec840a7fb4cc8b03c006515599565" Name="Diagram1">
-        <EntityTypeShape EntityType="CustomerDBModel.Customer" Width="1.5" PointX="0.75" PointY="6.5" />
-        <EntityTypeShape EntityType="CustomerDBModel.CustomerMenu" Width="1.5" PointX="3" PointY="3.75" />
-        <EntityTypeShape EntityType="CustomerDBModel.Menu" Width="1.5" PointX="0.75" PointY="3.875" />
+        <EntityTypeShape EntityType="CustomerDBModel.Customer" Width="1.5" PointX="0.75" PointY="6.625" />
+        <EntityTypeShape EntityType="CustomerDBModel.CustomerMenu" Width="1.5" PointX="3" PointY="3.875" />
+        <EntityTypeShape EntityType="CustomerDBModel.Menu" Width="1.5" PointX="0.75" PointY="4" />
         <EntityTypeShape EntityType="CustomerDBModel.MenuProduto" Width="1.5" PointX="3" PointY="0.75" />
         <EntityTypeShape EntityType="CustomerDBModel.Produto" Width="1.5" PointX="0.75" PointY="1.125" />
         <EntityTypeShape EntityType="CustomerDBModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="2.125" />

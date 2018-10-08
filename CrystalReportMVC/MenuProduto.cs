@@ -17,6 +17,7 @@ namespace CrystalReportMVC
         public int Id { get; set; }
         public int IdMenu { get; set; }
         public int IdProduto { get; set; }
+        public Nullable<int> quantidade { get; set; }
     
         public virtual Menu Menu { get; set; }
         public virtual Produto Produto { get; set; }

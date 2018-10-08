@@ -72,27 +72,234 @@ namespace CrystalReportMVC.Controllers
 
             foreach (var customer in customerModel)
             {
-            
-                foreach(var customerMenu in customer.CustomerMenu)
+                List<CustomerByMenuViewModel> customerList = new List<CustomerByMenuViewModel>();
+                var last = customer.CustomerMenu.Last();
+                CustomerByMenuViewModel customerReport = new CustomerByMenuViewModel();
+                foreach (var customerMenu in customer.CustomerMenu)
                 {
                     var menu = customerMenu.Menu;
                  
-
-                    foreach(var produtoMenu in menu.MenuProduto)
+                    foreach (var produtoMenu in menu.MenuProduto)
                     {
                         var produto = produtoMenu.Produto;
-                        CustomerByMenuViewModel customerReport = new CustomerByMenuViewModel();
+                    
                         customerReport.CustomerName = customer.CustomerName;
                         customerReport.IdCustomer = customer.id;
-                        customerReport.IdMenu = menu.id;
-                        customerReport.dia = menu.dia;
-                        customerReport.ProductName = produto.Nome;
-                        customerReport.IdProduct = produto.id;
-                        customerByMenuReport.Add(customerReport);
+                        bool find = false;
+                        switch (menu.dia)
+                        {
+                            case 1 :
+                                if (customerReport.ProductNameDomingo != null)
+                                {
+                                    customerList.Add(customerReport);
+                                    customerReport = new CustomerByMenuViewModel();
+                                    customerReport.CustomerName = customer.CustomerName;
+                                    customerReport.IdCustomer = customer.id;
+                                    customerReport.ProductNameDomingo = produto.Nome;
+                                    customerReport.productQuantityDomingo = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                }
+                                else
+                                {
+                                    foreach (var customerRow in customerList)
+                                    { 
+                                        if(customerRow.ProductNameDomingo == null)
+                                        {
+                                            customerRow.ProductNameDomingo = produto.Nome;
+                                            customerRow.productQuantityDomingo = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                            find = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!find)
+                                    {
+                                        customerReport.ProductNameDomingo = produto.Nome;
+                                        customerReport.productQuantityDomingo = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                    }
+                                }
+                            break;
+                            case 2:
+                                if (customerReport.ProductNameSegunda != null)
+                                {
+                                    customerList.Add(customerReport);
+                                    customerReport = new CustomerByMenuViewModel();
+                                    customerReport.CustomerName = customer.CustomerName;
+                                    customerReport.IdCustomer = customer.id;
+                                    customerReport.ProductNameSegunda = produto.Nome;
+                                    customerReport.productQuantitySegunda = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                }
+                                else
+                                {
+                                    foreach (var customerRow in customerList)
+                                    {
+                                        if (customerRow.ProductNameSegunda == null)
+                                        {
+                                            customerRow.ProductNameSegunda = produto.Nome;
+                                            customerRow.productQuantitySegunda = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                            find = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!find)
+                                    {
+                                        customerReport.ProductNameSegunda = produto.Nome;
+                                        customerReport.productQuantitySegunda = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                    }
+                                }
+                                break;
+                            case 3:
+                                if (customerReport.ProductNameTerca != null)
+                                {
+                                    customerList.Add(customerReport);
+                                    customerReport = new CustomerByMenuViewModel();
+                                    customerReport.CustomerName = customer.CustomerName;
+                                    customerReport.IdCustomer = customer.id;
+                                    customerReport.ProductNameTerca = produto.Nome;
+                                    customerReport.productQuantityTerca = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                }
+                                else
+                                {
+                                    foreach (var customerRow in customerList)
+                                    {
+                                        if (customerRow.ProductNameTerca == null)
+                                        {
+                                            customerRow.ProductNameTerca = produto.Nome;
+                                            customerRow.productQuantityTerca = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                            find = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!find)
+                                    {
+                                        customerReport.ProductNameTerca = produto.Nome;
+                                        customerReport.productQuantityTerca = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                    }
+                                }
+                                break;
+                            case 4:
+                                if (customerReport.ProductNameQuarta != null)
+                                {
+                                    customerList.Add(customerReport);
+                                    customerReport = new CustomerByMenuViewModel();
+                                    customerReport.CustomerName = customer.CustomerName;
+                                    customerReport.IdCustomer = customer.id;
+                                    customerReport.ProductNameQuarta = produto.Nome;
+                                    customerReport.productQuantityQuarta = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                }
+                                else
+                                {
+                                    foreach (var customerRow in customerList)
+                                    {
+                                        if (customerRow.ProductNameQuarta == null)
+                                        {
+                                            customerRow.ProductNameQuarta = produto.Nome;
+                                            customerRow.productQuantityQuarta = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                            find = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!find)
+                                    {
+                                        customerReport.ProductNameQuarta = produto.Nome;
+                                        customerReport.productQuantityQuarta = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                    }
+                                }
+                                break;
+                            case 5:
+                                if (customerReport.ProductNameQuinta != null)
+                                {
+                                    customerList.Add(customerReport);
+                                    customerReport = new CustomerByMenuViewModel();
+                                    customerReport.CustomerName = customer.CustomerName;
+                                    customerReport.IdCustomer = customer.id;
+                                    customerReport.ProductNameQuinta = produto.Nome;
+                                    customerReport.productQuantityQuinta = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                }
+                                else
+                                {
+                                    foreach (var customerRow in customerList)
+                                    {
+                                        if (customerRow.ProductNameQuinta == null)
+                                        {
+                                            customerRow.ProductNameQuinta = produto.Nome;
+                                            customerRow.productQuantityQuinta = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                            find = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!find)
+                                    {
+                                        customerReport.ProductNameQuinta = produto.Nome;
+                                        customerReport.productQuantityQuinta = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                    }
+                                }
+                                break;
+                            case 6:
+                                if (customerReport.ProductNameSexta!= null)
+                                {
+                                    customerList.Add(customerReport);
+                                    customerReport = new CustomerByMenuViewModel();
+                                    customerReport.CustomerName = customer.CustomerName;
+                                    customerReport.IdCustomer = customer.id;
+                                    customerReport.ProductNameSexta = produto.Nome;
+                                    customerReport.productQuantitySexta = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                }
+                                else
+                                {
+                                    foreach (var customerRow in customerList)
+                                    {
+                                        if (customerRow.ProductNameSexta == null)
+                                        {
+                                            customerRow.ProductNameSexta = produto.Nome;
+                                            customerRow.productQuantitySexta = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                            find = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!find)
+                                    {
+                                        customerReport.ProductNameSexta = produto.Nome;
+                                        customerReport.productQuantitySexta = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                    }
+                                }
+                                break;
+                            case 7:
+                                if (customerReport.ProductNameSabado != null)
+                                {
+                                    customerList.Add(customerReport);
+                                    customerReport = new CustomerByMenuViewModel();
+                                    customerReport.CustomerName = customer.CustomerName;
+                                    customerReport.IdCustomer = customer.id;
+                                    customerReport.ProductNameSabado = produto.Nome;
+                                    customerReport.productQuantitySabado = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                }
+                                else
+                                {
+                                    foreach (var customerRow in customerList)
+                                    {
+                                        if (customerRow.ProductNameSabado == null)
+                                        {
+                                            customerRow.ProductNameSabado = produto.Nome;
+                                            customerRow.productQuantitySabado= produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                            find = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!find)
+                                    {
+                                        customerReport.ProductNameSabado = produto.Nome;
+                                        customerReport.productQuantitySabado = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                    }
+                                }
+                                break;
+                        }
+                       
                     }
-
+                    if(customerReport.checkHasValue() && customerMenu.Equals(last)) {
+                        customerList.Add(customerReport);
+                    }
+                  
                 }
-
+                customerByMenuReport.AddRange(customerList);
             }
 
             ReportDocument rd = new ReportDocument();

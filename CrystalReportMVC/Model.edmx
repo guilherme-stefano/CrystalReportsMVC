@@ -38,6 +38,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdMenu" Type="int" Nullable="false" />
           <Property Name="IdProduto" Type="int" Nullable="false" />
+          <Property Name="quantidade" Type="int" />
         </EntityType>
         <EntityType Name="Produto">
           <Key>
@@ -194,6 +195,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdMenu" Type="Int32" Nullable="false" />
           <Property Name="IdProduto" Type="Int32" Nullable="false" />
+          <Property Name="quantidade" Type="Int32" />
           <NavigationProperty Name="Menu" Relationship="CustomerDBModel.FK_MenuProduto_Menu" FromRole="MenuProduto" ToRole="Menu" />
           <NavigationProperty Name="Produto" Relationship="CustomerDBModel.FK_MenuProduto_Produto" FromRole="MenuProduto" ToRole="Produto" />
         </EntityType>
@@ -301,6 +303,7 @@
           <EntitySetMapping Name="MenuProduto">
             <EntityTypeMapping TypeName="CustomerDBModel.MenuProduto">
               <MappingFragment StoreEntitySet="MenuProduto">
+                <ScalarProperty Name="quantidade" ColumnName="quantidade" />
                 <ScalarProperty Name="IdProduto" ColumnName="IdProduto" />
                 <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
