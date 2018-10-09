@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="CustomerDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cidade">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Nome" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="id" />
@@ -15,6 +22,7 @@
           <Property Name="CustomerZipCode" Type="int" />
           <Property Name="CustomerCountry" Type="varchar" MaxLength="50" />
           <Property Name="CustomerCity" Type="varchar" MaxLength="50" />
+          <Property Name="IdCidade" Type="int" />
         </EntityType>
         <EntityType Name="CustomerMenu">
           <Key>
@@ -57,6 +65,18 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <Association Name="FK_Customer_Cidade">
+          <End Role="Cidade" Type="Self.Cidade" Multiplicity="0..1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidade">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="IdCidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CustomerMenu_Customer">
           <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
           <End Role="CustomerMenu" Type="Self.CustomerMenu" Multiplicity="*" />
@@ -106,12 +126,17 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="CustomerDBModelStoreContainer">
+          <EntitySet Name="Cidade" EntityType="Self.Cidade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerMenu" EntityType="Self.CustomerMenu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenuProduto" EntityType="Self.MenuProduto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Produto" EntityType="Self.Produto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Customer_Cidade" Association="Self.FK_Customer_Cidade">
+            <End Role="Cidade" EntitySet="Cidade" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
           <AssociationSet Name="FK_CustomerMenu_Customer" Association="Self.FK_CustomerMenu_Customer">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="CustomerMenu" EntitySet="CustomerMenu" />
@@ -134,12 +159,17 @@
     <edmx:ConceptualModels>
       <Schema Namespace="CustomerDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="CustomerDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cidade" EntityType="CustomerDBModel.Cidade" />
           <EntitySet Name="Customer" EntityType="CustomerDBModel.Customer" />
           <EntitySet Name="CustomerMenu" EntityType="CustomerDBModel.CustomerMenu" />
           <EntitySet Name="Menu" EntityType="CustomerDBModel.Menu" />
           <EntitySet Name="MenuProduto" EntityType="CustomerDBModel.MenuProduto" />
           <EntitySet Name="Produto" EntityType="CustomerDBModel.Produto" />
           <EntitySet Name="sysdiagrams" EntityType="CustomerDBModel.sysdiagrams" />
+          <AssociationSet Name="FK_Customer_Cidade" Association="CustomerDBModel.FK_Customer_Cidade">
+            <End Role="Cidade" EntitySet="Cidade" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
           <AssociationSet Name="FK_CustomerMenu_Customer" Association="CustomerDBModel.FK_CustomerMenu_Customer">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="CustomerMenu" EntitySet="CustomerMenu" />
@@ -157,6 +187,14 @@
             <End Role="MenuProduto" EntitySet="MenuProduto" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Cidade">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="CustomerDBModel.FK_Customer_Cidade" FromRole="Cidade" ToRole="Customer" />
+        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="id" />
@@ -167,6 +205,8 @@
           <Property Name="CustomerZipCode" Type="Int32" />
           <Property Name="CustomerCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CustomerCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdCidade" Type="Int32" />
+          <NavigationProperty Name="Cidade" Relationship="CustomerDBModel.FK_Customer_Cidade" FromRole="Customer" ToRole="Cidade" />
           <NavigationProperty Name="CustomerMenu" Relationship="CustomerDBModel.FK_CustomerMenu_Customer" FromRole="Customer" ToRole="CustomerMenu" />
         </EntityType>
         <EntityType Name="CustomerMenu">
@@ -217,6 +257,18 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
+        <Association Name="FK_Customer_Cidade">
+          <End Type="CustomerDBModel.Cidade" Role="Cidade" Multiplicity="0..1" />
+          <End Type="CustomerDBModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cidade">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="IdCidade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CustomerMenu_Customer">
           <End Type="CustomerDBModel.Customer" Role="Customer" Multiplicity="0..1" />
           <End Type="CustomerDBModel.CustomerMenu" Role="CustomerMenu" Multiplicity="*" />
@@ -271,9 +323,18 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="CustomerDBModelStoreContainer" CdmEntityContainer="CustomerDBEntities">
+          <EntitySetMapping Name="Cidade">
+            <EntityTypeMapping TypeName="CustomerDBModel.Cidade">
+              <MappingFragment StoreEntitySet="Cidade">
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Customer">
             <EntityTypeMapping TypeName="CustomerDBModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="IdCidade" ColumnName="IdCidade" />
                 <ScalarProperty Name="CustomerCity" ColumnName="CustomerCity" />
                 <ScalarProperty Name="CustomerCountry" ColumnName="CustomerCountry" />
                 <ScalarProperty Name="CustomerZipCode" ColumnName="CustomerZipCode" />

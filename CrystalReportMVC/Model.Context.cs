@@ -25,6 +25,7 @@ namespace CrystalReportMVC
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Cidade> Cidade { get; set; }
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<CustomerMenu> CustomerMenu { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }

@@ -13,6 +13,7 @@ namespace CrystalReportMVC.ReportsViewModels
         public int CustomerZipCode { get; set; }
         public string CustomerCountry { get; set; }
         public string CustomerCity { get; set; }
+        public int idCidade { get; set; }
         public ICollection<CustomerMenuReportViewModel> CustomerMenu { get; set; }
     }
 }

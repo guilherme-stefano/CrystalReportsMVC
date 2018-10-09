@@ -24,6 +24,8 @@ namespace CrystalReportMVC.ReportsViewModels
         public string productQuantityDomingo { get; set; }
         public string ProductNameDomingo { get; set; }
 
+        public virtual CustomerReportViewModel Customer { get; set; }
+
         public bool checkHasValue()
         {
             return ProductNameSegunda != null

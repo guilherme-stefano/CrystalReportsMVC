@@ -160,6 +160,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Cidade.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="CrystalReports\Customer.cs">
@@ -168,16 +171,28 @@
       <DependentUpon>Customer.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="CrystalReports\CustomerByMenu.cs">
+    <Compile Include="CrystalReports\CustomerByMenuDataTables.cs">
+      <DependentUpon>CustomerByMenuDataTables.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CustomerByMenu.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="CrystalReports\CustomerByMenu.cs">
+      <DependentUpon>CustomerByMenu.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="CrystalReports\ReportFromDB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportFromDB.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CrystalReports\ReportGroupingWithLink.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportGroupingWithLink.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Customer.cs">
@@ -189,6 +204,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mapping\CidadeProfile.cs" />
     <Compile Include="Mapping\CustomerMenuProfile.cs" />
     <Compile Include="Mapping\CustomerProfile.cs" />
     <Compile Include="Mapping\MenuProdutoProfile.cs" />
@@ -219,7 +235,11 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportsViewModels\CidadeReportViewModel.cs" />
+    <Compile Include="ReportsViewModels\CustomerByMenuFooter.cs" />
+    <Compile Include="ReportsViewModels\CustomerByMenuHeader.cs" />
     <Compile Include="ReportsViewModels\CustomerByMenuViewModel.cs" />
+    <Compile Include="ReportsViewModels\CustomerByMenuViewModel2.cs" />
     <Compile Include="ReportsViewModels\CustomerMenuReportViewModel.cs" />
     <Compile Include="ReportsViewModels\CustomerReportViewModel.cs" />
     <Compile Include="ReportsViewModels\MenuProdutoReportViewModel.cs" />
@@ -311,6 +331,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Customer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="CrystalReports\CustomerByMenuDataTables.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CustomerByMenuDataTables.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="CrystalReports\CustomerByMenu.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CustomerByMenu.cs</LastGenOutput>
@@ -318,6 +342,10 @@
     <EmbeddedResource Include="CrystalReports\ReportFromDB.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportFromDB.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrystalReports\ReportGroupingWithLink.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportGroupingWithLink.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
