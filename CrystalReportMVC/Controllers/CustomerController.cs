@@ -62,7 +62,115 @@ namespace CrystalReportMVC.Controllers
             return File(stream, "application/pdf", "CustomerList.pdf");
         }
 
-       public ActionResult ExportMenuByCustomer()
+        public ActionResult ExportMenuByCustomer2()
+        {
+            List<Customer> allCustomer = new List<Customer>();
+            allCustomer = context.Customer.ToList();
+            var customerModel = Mapper.Map<IEnumerable<CustomerReportViewModel>>(allCustomer);
+
+            List<CustomerByMenuViewModel2> customerByMenuReport = new List<CustomerByMenuViewModel2>();
+            foreach (var customer in customerModel)
+            {
+                CustomerByMenuViewModel2 customerReport = new CustomerByMenuViewModel2();
+                foreach (var customerMenu in customer.CustomerMenu)
+                {
+                    var menu = customerMenu.Menu;
+                    int size = 0;
+                    customerReport.CustomerName = customer.CustomerName;
+                    customerReport.IdCustomer = customer.id;
+                    foreach (var produtoMenu in menu.MenuProduto)
+                    {
+                        var count = 0;
+                        switch (menu.dia)
+                        {
+                            case 1:
+                                customerReport.produtosDomingo.Add(produtoMenu);
+                                count = customerReport.produtosDomingo.Count();
+                            break;
+                            case 2:
+                                customerReport.produtosSegunda.Add(produtoMenu);
+                                count = customerReport.produtosSegunda.Count();
+                            break;
+                            case 3:
+                                customerReport.produtosTerca.Add(produtoMenu);
+                                count = customerReport.produtosTerca.Count();
+                            break;
+                            case 4:
+                                customerReport.produtosQuarta.Add(produtoMenu);
+                                count = customerReport.produtosQuarta.Count();
+                            break;
+                            case 5:
+                                customerReport.produtosQuinta.Add(produtoMenu);
+                                count = customerReport.produtosQuinta.Count();
+                            break;
+                            case 6:
+                                customerReport.produtosSexta.Add(produtoMenu);
+                                count = customerReport.produtosSexta.Count();
+                            break;
+                            case 7:
+                                customerReport.produtosSabado.Add(produtoMenu);
+                                count = customerReport.produtosSabado.Count();
+                            break;
+                                
+                        }
+                        size = count > size ? count : size;
+                    }
+                    customerReport.maxQuantity = size;
+                }
+                customerByMenuReport.Add(customerReport);
+            }
+            List<CustomerByMenuViewModel> report = new List<CustomerByMenuViewModel>();
+            foreach (var customerList in customerByMenuReport)
+            {
+                for (int i=0; i< customerList.maxQuantity; i++)
+                {
+                    CustomerByMenuViewModel customerReport = new CustomerByMenuViewModel();
+                    customerReport.IdCustomer = customerList.IdCustomer;
+                    customerReport.CustomerName = customerList.CustomerName;
+                    var domingo = customerList.produtosDomingo.ElementAtOrDefault(i);
+                    customerReport.ProductNameDomingo = domingo != null ? domingo.Produto.Nome : "";
+                    customerReport.productQuantityDomingo = domingo != null ? domingo.quantidade.ToString() : "";
+                    var segunda = customerList.produtosSegunda.ElementAtOrDefault(i);
+                    customerReport.ProductNameSegunda = segunda != null ? segunda.Produto.Nome : "";
+                    customerReport.productQuantitySegunda = segunda != null ? segunda.quantidade.ToString() : "";
+                    var terca = customerList.produtosTerca.ElementAtOrDefault(i);
+                    customerReport.ProductNameTerca = terca != null ? terca.Produto.Nome : "";
+                    customerReport.productQuantityTerca = terca != null ? terca.quantidade.ToString() : "";
+                    var quarta = customerList.produtosQuarta.ElementAtOrDefault(i);
+                    customerReport.ProductNameQuarta = quarta != null ? quarta.Produto.Nome : "";
+                    customerReport.productQuantityQuarta = quarta != null ? quarta.quantidade.ToString() : "";
+                    var quinta = customerList.produtosQuinta.ElementAtOrDefault(i);
+                    customerReport.ProductNameQuinta = quinta != null ? quinta.Produto.Nome : "";
+                    customerReport.productQuantityQuinta = quinta != null ? quinta.quantidade.ToString() : "";
+                    var sexta = customerList.produtosSexta.ElementAtOrDefault(i);
+                    customerReport.ProductNameSexta = sexta != null ? sexta.Produto.Nome : "";
+                    customerReport.productQuantitySexta = sexta != null ? sexta.quantidade.ToString() : "";
+                    var sabado = customerList.produtosSabado.ElementAtOrDefault(i);
+                    customerReport.ProductNameSabado = sabado != null ? sabado.Produto.Nome : "";
+                    customerReport.productQuantitySabado = sabado != null ? sabado.quantidade.ToString() : "";
+                    report.Add(customerReport);
+                }
+            }
+            ReportDocument rd = new ReportDocument();
+            var combined = Path.Combine(Server.MapPath("~/CrystalReports"), "CustomerByMenu.rpt");
+            rd.Load(combined);
+
+            rd.SetDataSource(report);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+
+            rd.Close();
+            rd.Dispose();
+
+            return File(stream, "application/pdf", "MenuByCustomer.pdf");
+        }
+
+        public ActionResult ExportMenuByCustomer()
         {
             List<Customer> allCustomer = new List<Customer>();
             allCustomer = context.Customer.ToList();

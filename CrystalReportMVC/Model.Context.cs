@@ -30,6 +30,5 @@ namespace CrystalReportMVC
         public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<MenuProduto> MenuProduto { get; set; }
         public virtual DbSet<Produto> Produto { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }
