@@ -160,6 +160,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Cidade.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="CrystalReports\Customer.cs">
@@ -223,9 +226,13 @@
     <Compile Include="ReportsViewModels\CustomerByMenuViewModel2.cs" />
     <Compile Include="ReportsViewModels\CustomerMenuReportViewModel.cs" />
     <Compile Include="ReportsViewModels\CustomerReportViewModel.cs" />
+    <Compile Include="ReportsViewModels\FilterCustomerViewModel.cs" />
     <Compile Include="ReportsViewModels\MenuProdutoReportViewModel.cs" />
     <Compile Include="ReportsViewModels\MenuReportViewModel.cs" />
     <Compile Include="ReportsViewModels\ProdutoReportViewModel.cs" />
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -236,8 +243,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model.Context.cs</LastGenOutput>
       <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Model.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

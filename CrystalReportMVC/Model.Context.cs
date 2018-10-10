@@ -13,10 +13,10 @@ namespace CrystalReportMVC
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CustomerDBEntities : DbContext
+    public partial class CustomerDBEntities1 : DbContext
     {
-        public CustomerDBEntities()
-            : base("name=CustomerDBEntities")
+        public CustomerDBEntities1()
+            : base("name=CustomerDBEntities1")
         {
         }
     
@@ -25,10 +25,12 @@ namespace CrystalReportMVC
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Cidade> Cidade { get; set; }
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<CustomerMenu> CustomerMenu { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<MenuProduto> MenuProduto { get; set; }
         public virtual DbSet<Produto> Produto { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

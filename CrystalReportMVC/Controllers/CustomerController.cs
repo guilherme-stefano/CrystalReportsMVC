@@ -12,7 +12,7 @@ namespace CrystalReportMVC.Controllers
 {
     public class CustomerController : Controller
     {
-        private CustomerDBEntities context = new CustomerDBEntities();
+        private CustomerDBEntities1 context = new CustomerDBEntities1();
         public ActionResult Index()
         {
             var customerList = context.Customer.ToList();
@@ -62,10 +62,10 @@ namespace CrystalReportMVC.Controllers
             return File(stream, "application/pdf", "CustomerList.pdf");
         }
 
-        public ActionResult ExportMenuByCustomer2()
+        public ActionResult ExportMenuByCustomer2(FilterCustomerViewModel filter)
         {
             List<Customer> allCustomer = new List<Customer>();
-            allCustomer = context.Customer.ToList();
+            allCustomer = context.Customer.Where(d => DateTime.Compare(d.created_at, filter.criado_em) > 0).ToList();
             var customerModel = Mapper.Map<IEnumerable<CustomerReportViewModel>>(allCustomer);
 
             List<CustomerByMenuViewModel2> customerByMenuReport = new List<CustomerByMenuViewModel2>();
