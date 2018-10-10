@@ -14,6 +14,7 @@ namespace CrystalReportMVC.ReportsViewModels
         public string CustomerCountry { get; set; }
         public string CustomerCity { get; set; }
         public int idCidade { get; set; }
+        public DateTime created_at { get; set; }
         public ICollection<CustomerMenuReportViewModel> CustomerMenu { get; set; }
     }
 }

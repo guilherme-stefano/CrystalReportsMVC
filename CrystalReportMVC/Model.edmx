@@ -23,6 +23,7 @@
           <Property Name="CustomerCountry" Type="varchar" MaxLength="50" />
           <Property Name="CustomerCity" Type="varchar" MaxLength="50" />
           <Property Name="IdCidade" Type="int" />
+          <Property Name="created_at" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="CustomerMenu">
           <Key>
@@ -206,6 +207,7 @@
           <Property Name="CustomerCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CustomerCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdCidade" Type="Int32" />
+          <Property Name="created_at" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Cidade" Relationship="CustomerDBModel.FK_Customer_Cidade" FromRole="Customer" ToRole="Cidade" />
           <NavigationProperty Name="CustomerMenu" Relationship="CustomerDBModel.FK_CustomerMenu_Customer" FromRole="Customer" ToRole="CustomerMenu" />
         </EntityType>
@@ -334,6 +336,7 @@
           <EntitySetMapping Name="Customer">
             <EntityTypeMapping TypeName="CustomerDBModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
                 <ScalarProperty Name="IdCidade" ColumnName="IdCidade" />
                 <ScalarProperty Name="CustomerCity" ColumnName="CustomerCity" />
                 <ScalarProperty Name="CustomerCountry" ColumnName="CustomerCountry" />

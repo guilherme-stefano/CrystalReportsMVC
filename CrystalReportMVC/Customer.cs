@@ -27,6 +27,7 @@ namespace CrystalReportMVC
         public string CustomerCountry { get; set; }
         public string CustomerCity { get; set; }
         public Nullable<int> IdCidade { get; set; }
+        public System.DateTime created_at { get; set; }
     
         public virtual Cidade Cidade { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

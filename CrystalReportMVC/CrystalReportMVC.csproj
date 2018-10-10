@@ -242,6 +242,7 @@
     <Compile Include="ReportsViewModels\CustomerByMenuViewModel2.cs" />
     <Compile Include="ReportsViewModels\CustomerMenuReportViewModel.cs" />
     <Compile Include="ReportsViewModels\CustomerReportViewModel.cs" />
+    <Compile Include="ReportsViewModels\FilterCustomerViewModel.cs" />
     <Compile Include="ReportsViewModels\MenuProdutoReportViewModel.cs" />
     <Compile Include="ReportsViewModels\MenuReportViewModel.cs" />
     <Compile Include="ReportsViewModels\ProdutoReportViewModel.cs" />

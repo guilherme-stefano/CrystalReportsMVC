@@ -15,10 +15,24 @@
     <div><a href="@Url.Action("ExportCustomers")"> Export Customers </a></div>
     <div><a href="@Url.Action("ExportCustomersFromDB")"> Export Customers From DB </a></div>
     <div><a href="@Url.Action("ExportMenuByCustomer")"> Export Menu By Customer </a></div>
-    <div><a href="@Url.Action("ExportMenuByCustomer2")"> Export Menu By Customer2 </a></div>
     <div><a href="@Url.Action("ExportMenuByCustomer3")"> Export Menu By Customer3 </a></div>
     <div><a href="@Url.Action("ExportMenuByCustomer4")"> Export Menu By Customer4 </a></div>
 </p>
+
+<form action="@Url.Action("ExportMenuByCustomer2")" method="post">
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="date" value="" name="criado_em" id="criado_em" class="btn btn-default" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="ExportMenuByCustomer2" class="btn btn-default" />
+        </div>
+    </div>
+</form>
+
 <table class="table">
     <tr>
         <th>
