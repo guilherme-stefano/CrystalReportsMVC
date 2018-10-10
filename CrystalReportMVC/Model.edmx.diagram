@@ -5,12 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f46ec840a7fb4cc8b03c006515599565" Name="Diagram1">
-        <EntityTypeShape EntityType="CustomerDBModel.Cidade" Width="1.5" PointX="1.5" PointY="11.125" />
+        <EntityTypeShape EntityType="CustomerDBModel.Cidade" Width="1.5" PointX="0.75" PointY="10.5" />
         <EntityTypeShape EntityType="CustomerDBModel.Customer" Width="1.5" PointX="0.75" PointY="6.375" />
         <EntityTypeShape EntityType="CustomerDBModel.CustomerMenu" Width="1.5" PointX="3" PointY="0.75" />
         <EntityTypeShape EntityType="CustomerDBModel.Menu" Width="1.5" PointX="0.75" PointY="3.875" />
         <EntityTypeShape EntityType="CustomerDBModel.MenuProduto" Width="1.5" PointX="3" PointY="3.625" />
-        <EntityTypeShape EntityType="CustomerDBModel.Produto" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="CustomerDBModel.Produto" Width="1.5" PointX="0.75" PointY="0.875" />
         <EntityTypeShape EntityType="CustomerDBModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="2" />
         <AssociationConnector Association="CustomerDBModel.FK_Customer_Cidade" />
         <AssociationConnector Association="CustomerDBModel.FK_CustomerMenu_Customer" />

@@ -134,25 +134,25 @@ namespace CrystalReportMVC.Controllers
                     customerReport.CustomerName = customerList.CustomerName;
                     var domingo = customerList.produtosDomingo.ElementAtOrDefault(i);
                     customerReport.ProductNameDomingo = domingo != null ? domingo.Produto.Nome : "";
-                    customerReport.productQuantityDomingo = domingo != null ? domingo.quantidade.ToString() : "";
+                    customerReport.productQuantityDomingo = domingo != null ? domingo.quantidade : 0;
                     var segunda = customerList.produtosSegunda.ElementAtOrDefault(i);
                     customerReport.ProductNameSegunda = segunda != null ? segunda.Produto.Nome : "";
-                    customerReport.productQuantitySegunda = segunda != null ? segunda.quantidade.ToString() : "";
+                    customerReport.productQuantitySegunda = segunda != null ? segunda.quantidade : 0;
                     var terca = customerList.produtosTerca.ElementAtOrDefault(i);
                     customerReport.ProductNameTerca = terca != null ? terca.Produto.Nome : "";
-                    customerReport.productQuantityTerca = terca != null ? terca.quantidade.ToString() : "";
+                    customerReport.productQuantityTerca = terca != null ? terca.quantidade : 0;
                     var quarta = customerList.produtosQuarta.ElementAtOrDefault(i);
                     customerReport.ProductNameQuarta = quarta != null ? quarta.Produto.Nome : "";
-                    customerReport.productQuantityQuarta = quarta != null ? quarta.quantidade.ToString() : "";
+                    customerReport.productQuantityQuarta = quarta != null ? quarta.quantidade : 0;
                     var quinta = customerList.produtosQuinta.ElementAtOrDefault(i);
                     customerReport.ProductNameQuinta = quinta != null ? quinta.Produto.Nome : "";
-                    customerReport.productQuantityQuinta = quinta != null ? quinta.quantidade.ToString() : "";
+                    customerReport.productQuantityQuinta = quinta != null ? quinta.quantidade : 0;
                     var sexta = customerList.produtosSexta.ElementAtOrDefault(i);
                     customerReport.ProductNameSexta = sexta != null ? sexta.Produto.Nome : "";
-                    customerReport.productQuantitySexta = sexta != null ? sexta.quantidade.ToString() : "";
+                    customerReport.productQuantitySexta = sexta != null ? sexta.quantidade : 0;
                     var sabado = customerList.produtosSabado.ElementAtOrDefault(i);
                     customerReport.ProductNameSabado = sabado != null ? sabado.Produto.Nome : "";
-                    customerReport.productQuantitySabado = sabado != null ? sabado.quantidade.ToString() : "";
+                    customerReport.productQuantitySabado = sabado != null ? sabado.quantidade : 0;
                     report.Add(customerReport);
                 }
             }
@@ -243,25 +243,39 @@ namespace CrystalReportMVC.Controllers
                     customerReport.CustomerName = customerList.CustomerName;
                     var domingo = customerList.produtosDomingo.ElementAtOrDefault(i);
                     customerReport.ProductNameDomingo = domingo != null ? domingo.Produto.Nome : "";
-                    customerReport.productQuantityDomingo = domingo != null ? domingo.quantidade.ToString() : "";
+                    customerReport.productQuantityDomingo = domingo != null ? domingo.quantidade : 0;
+                    customerReport.productValueDomingo = domingo != null ?  (domingo.Produto.price * customerReport.productQuantityDomingo)/100: 0;
+                    customerReport.productQuantityDomingo_str = domingo != null ? customerReport.productQuantityDomingo.ToString() : "";
                     var segunda = customerList.produtosSegunda.ElementAtOrDefault(i);
                     customerReport.ProductNameSegunda = segunda != null ? segunda.Produto.Nome : "";
-                    customerReport.productQuantitySegunda = segunda != null ? segunda.quantidade.ToString() : "";
+                    customerReport.productQuantitySegunda = segunda != null ? segunda.quantidade : 0;
+                    customerReport.productValueSegunda = segunda != null ?  (segunda.Produto.price * customerReport.productQuantitySegunda)/100: 0;
+                    customerReport.productQuantitySegunda_str = segunda != null ? customerReport.productQuantitySegunda.ToString() : "";
                     var terca = customerList.produtosTerca.ElementAtOrDefault(i);
                     customerReport.ProductNameTerca = terca != null ? terca.Produto.Nome : "";
-                    customerReport.productQuantityTerca = terca != null ? terca.quantidade.ToString() : "";
+                    customerReport.productQuantityTerca = terca != null ? terca.quantidade : 0;
+                    customerReport.productValueTerca = terca != null ?  (terca.Produto.price * customerReport.productQuantityTerca)/100: 0;
+                    customerReport.productQuantityTerca_str = terca != null ? customerReport.productQuantityTerca.ToString() : "";
                     var quarta = customerList.produtosQuarta.ElementAtOrDefault(i);
                     customerReport.ProductNameQuarta = quarta != null ? quarta.Produto.Nome : "";
-                    customerReport.productQuantityQuarta = quarta != null ? quarta.quantidade.ToString() : "";
+                    customerReport.productQuantityQuarta = quarta != null ? quarta.quantidade : 0;
+                    customerReport.productValueQuarta = quarta != null ?  (quarta.Produto.price * customerReport.productQuantityQuarta)/100: 0;
+                    customerReport.productQuantityQuarta_str = quarta != null ? customerReport.productQuantityQuarta.ToString() : "";
                     var quinta = customerList.produtosQuinta.ElementAtOrDefault(i);
                     customerReport.ProductNameQuinta = quinta != null ? quinta.Produto.Nome : "";
-                    customerReport.productQuantityQuinta = quinta != null ? quinta.quantidade.ToString() : "";
+                    customerReport.productQuantityQuinta = quinta != null ? quinta.quantidade : 0;
+                    customerReport.productValueQuinta = quinta != null ?  (quinta.Produto.price * customerReport.productQuantityQuinta)/100: 0;
+                    customerReport.productQuantityQuinta_str = quinta != null ? customerReport.productQuantityQuinta.ToString() : "";
                     var sexta = customerList.produtosSexta.ElementAtOrDefault(i);
                     customerReport.ProductNameSexta = sexta != null ? sexta.Produto.Nome : "";
-                    customerReport.productQuantitySexta = sexta != null ? sexta.quantidade.ToString() : "";
+                    customerReport.productQuantitySexta = sexta != null ? sexta.quantidade : 0;
+                    customerReport.productValueSexta = sexta != null ? (sexta.Produto.price * customerReport.productQuantitySexta)/100: 0;
+                    customerReport.productQuantitySexta_str = sexta != null ? customerReport.productQuantitySexta.ToString() : "";
                     var sabado = customerList.produtosSabado.ElementAtOrDefault(i);
                     customerReport.ProductNameSabado = sabado != null ? sabado.Produto.Nome : "";
-                    customerReport.productQuantitySabado = sabado != null ? sabado.quantidade.ToString() : "";
+                    customerReport.productQuantitySabado = sabado != null ? sabado.quantidade : 0;
+                    customerReport.productValueSabado = sabado != null ? (sabado.Produto.price * customerReport.productQuantitySabado)/100 : 0;
+                    customerReport.productQuantitySabado_str = sabado != null ? customerReport.productQuantitySabado.ToString() : "";
                     report.Add(customerReport);
                 }
             }
@@ -350,7 +364,7 @@ namespace CrystalReportMVC.Controllers
                                     customerReport.CustomerName = customer.CustomerName;
                                     customerReport.IdCustomer = customer.id;
                                     customerReport.ProductNameDomingo = produto.Nome;
-                                    customerReport.productQuantityDomingo = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                    customerReport.productQuantityDomingo = produtoMenu.quantidade;
                                 }
                                 else
                                 {
@@ -359,7 +373,7 @@ namespace CrystalReportMVC.Controllers
                                         if (customerRow.ProductNameDomingo == null)
                                         {
                                             customerRow.ProductNameDomingo = produto.Nome;
-                                            customerRow.productQuantityDomingo = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                            customerRow.productQuantityDomingo = produtoMenu.quantidade;
                                             find = true;
                                             break;
                                         }
@@ -367,7 +381,7 @@ namespace CrystalReportMVC.Controllers
                                     if (!find)
                                     {
                                         customerReport.ProductNameDomingo = produto.Nome;
-                                        customerReport.productQuantityDomingo = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                        customerReport.productQuantityDomingo = produtoMenu.quantidade;
                                     }
                                 }
                                 break;
@@ -379,7 +393,7 @@ namespace CrystalReportMVC.Controllers
                                     customerReport.CustomerName = customer.CustomerName;
                                     customerReport.IdCustomer = customer.id;
                                     customerReport.ProductNameSegunda = produto.Nome;
-                                    customerReport.productQuantitySegunda = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                    customerReport.productQuantitySegunda = produtoMenu.quantidade;
                                 }
                                 else
                                 {
@@ -388,7 +402,7 @@ namespace CrystalReportMVC.Controllers
                                         if (customerRow.ProductNameSegunda == null)
                                         {
                                             customerRow.ProductNameSegunda = produto.Nome;
-                                            customerRow.productQuantitySegunda = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                            customerRow.productQuantitySegunda = produtoMenu.quantidade;
                                             find = true;
                                             break;
                                         }
@@ -396,7 +410,7 @@ namespace CrystalReportMVC.Controllers
                                     if (!find)
                                     {
                                         customerReport.ProductNameSegunda = produto.Nome;
-                                        customerReport.productQuantitySegunda = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                        customerReport.productQuantitySegunda = produtoMenu.quantidade;
                                     }
                                 }
                                 break;
@@ -408,7 +422,7 @@ namespace CrystalReportMVC.Controllers
                                     customerReport.CustomerName = customer.CustomerName;
                                     customerReport.IdCustomer = customer.id;
                                     customerReport.ProductNameTerca = produto.Nome;
-                                    customerReport.productQuantityTerca = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                    customerReport.productQuantityTerca = produtoMenu.quantidade;
                                 }
                                 else
                                 {
@@ -417,7 +431,7 @@ namespace CrystalReportMVC.Controllers
                                         if (customerRow.ProductNameTerca == null)
                                         {
                                             customerRow.ProductNameTerca = produto.Nome;
-                                            customerRow.productQuantityTerca = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                            customerRow.productQuantityTerca = produtoMenu.quantidade;
                                             find = true;
                                             break;
                                         }
@@ -425,7 +439,7 @@ namespace CrystalReportMVC.Controllers
                                     if (!find)
                                     {
                                         customerReport.ProductNameTerca = produto.Nome;
-                                        customerReport.productQuantityTerca = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                        customerReport.productQuantityTerca = produtoMenu.quantidade;
                                     }
                                 }
                                 break;
@@ -437,7 +451,7 @@ namespace CrystalReportMVC.Controllers
                                     customerReport.CustomerName = customer.CustomerName;
                                     customerReport.IdCustomer = customer.id;
                                     customerReport.ProductNameQuarta = produto.Nome;
-                                    customerReport.productQuantityQuarta = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                    customerReport.productQuantityQuarta = produtoMenu.quantidade;
                                 }
                                 else
                                 {
@@ -446,7 +460,7 @@ namespace CrystalReportMVC.Controllers
                                         if (customerRow.ProductNameQuarta == null)
                                         {
                                             customerRow.ProductNameQuarta = produto.Nome;
-                                            customerRow.productQuantityQuarta = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                            customerRow.productQuantityQuarta = produtoMenu.quantidade;
                                             find = true;
                                             break;
                                         }
@@ -454,7 +468,7 @@ namespace CrystalReportMVC.Controllers
                                     if (!find)
                                     {
                                         customerReport.ProductNameQuarta = produto.Nome;
-                                        customerReport.productQuantityQuarta = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                        customerReport.productQuantityQuarta = produtoMenu.quantidade;
                                     }
                                 }
                                 break;
@@ -466,7 +480,7 @@ namespace CrystalReportMVC.Controllers
                                     customerReport.CustomerName = customer.CustomerName;
                                     customerReport.IdCustomer = customer.id;
                                     customerReport.ProductNameQuinta = produto.Nome;
-                                    customerReport.productQuantityQuinta = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                    customerReport.productQuantityQuinta = produtoMenu.quantidade;
                                 }
                                 else
                                 {
@@ -475,7 +489,7 @@ namespace CrystalReportMVC.Controllers
                                         if (customerRow.ProductNameQuinta == null)
                                         {
                                             customerRow.ProductNameQuinta = produto.Nome;
-                                            customerRow.productQuantityQuinta = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                            customerRow.productQuantityQuinta = produtoMenu.quantidade;
                                             find = true;
                                             break;
                                         }
@@ -483,7 +497,7 @@ namespace CrystalReportMVC.Controllers
                                     if (!find)
                                     {
                                         customerReport.ProductNameQuinta = produto.Nome;
-                                        customerReport.productQuantityQuinta = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                        customerReport.productQuantityQuinta = produtoMenu.quantidade;
                                     }
                                 }
                                 break;
@@ -495,7 +509,7 @@ namespace CrystalReportMVC.Controllers
                                     customerReport.CustomerName = customer.CustomerName;
                                     customerReport.IdCustomer = customer.id;
                                     customerReport.ProductNameSexta = produto.Nome;
-                                    customerReport.productQuantitySexta = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                    customerReport.productQuantitySexta = produtoMenu.quantidade;
                                 }
                                 else
                                 {
@@ -504,7 +518,7 @@ namespace CrystalReportMVC.Controllers
                                         if (customerRow.ProductNameSexta == null)
                                         {
                                             customerRow.ProductNameSexta = produto.Nome;
-                                            customerRow.productQuantitySexta = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                            customerRow.productQuantitySexta = produtoMenu.quantidade;
                                             find = true;
                                             break;
                                         }
@@ -512,7 +526,7 @@ namespace CrystalReportMVC.Controllers
                                     if (!find)
                                     {
                                         customerReport.ProductNameSexta = produto.Nome;
-                                        customerReport.productQuantitySexta = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                        customerReport.productQuantitySexta = produtoMenu.quantidade;
                                     }
                                 }
                                 break;
@@ -524,7 +538,7 @@ namespace CrystalReportMVC.Controllers
                                     customerReport.CustomerName = customer.CustomerName;
                                     customerReport.IdCustomer = customer.id;
                                     customerReport.ProductNameSabado = produto.Nome;
-                                    customerReport.productQuantitySabado = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                    customerReport.productQuantitySabado = produtoMenu.quantidade;
                                 }
                                 else
                                 {
@@ -533,7 +547,7 @@ namespace CrystalReportMVC.Controllers
                                         if (customerRow.ProductNameSabado == null)
                                         {
                                             customerRow.ProductNameSabado = produto.Nome;
-                                            customerRow.productQuantitySabado = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                            customerRow.productQuantitySabado = produtoMenu.quantidade;
                                             find = true;
                                             break;
                                         }
@@ -541,7 +555,7 @@ namespace CrystalReportMVC.Controllers
                                     if (!find)
                                     {
                                         customerReport.ProductNameSabado = produto.Nome;
-                                        customerReport.productQuantitySabado = produtoMenu.quantidade != 0 ? produtoMenu.quantidade.ToString() : "";
+                                        customerReport.productQuantitySabado = produtoMenu.quantidade;
                                     }
                                 }
                                 break;
@@ -574,6 +588,78 @@ namespace CrystalReportMVC.Controllers
             rd.Dispose();
 
             return File(stream, "application/pdf", "MenuByCustomer.pdf");
+        }
+
+        public ActionResult CustomerByMenuProductReportViewModel()
+        {
+            List<Customer> allcustomer = new List<Customer>();
+            allcustomer = context.Customer.ToList();
+
+            List<CustomerByMenuProductReportViewModel> report = new List<CustomerByMenuProductReportViewModel>();
+            foreach (var customer in allcustomer)
+            {
+                foreach(var customerMenu in customer.CustomerMenu)
+                {
+                    var menu = customerMenu.Menu;
+                    foreach(var menuProduto in menu.MenuProduto)
+                    {
+                        CustomerByMenuProductReportViewModel viewModel = new CustomerByMenuProductReportViewModel();
+                        var produto = menuProduto.Produto;
+                        viewModel.CustomerName = customer.CustomerName;
+                        viewModel.IdCustomer = customer.id;
+                        viewModel.IdMenu = menu.id;
+                        viewModel.MenuDay = translateDay(menu.dia);
+                        viewModel.Quantity = menuProduto.quantidade??0;
+                        viewModel.ProductPrice = (float) produto.price/100;
+                        viewModel.ProductName = produto.Nome;
+                        viewModel.Total = viewModel.ProductPrice * (float) menuProduto.quantidade;
+                        report.Add(viewModel);
+                    }
+                }
+
+            }
+
+
+            ReportDocument rd = new ReportDocument();
+            var combined = Path.Combine(Server.MapPath("~/CrystalReports"), "ProductByCustomerPriceAnalitic.rpt");
+            rd.Load(combined);
+
+            rd.SetDataSource(report);
+
+            Response.Buffer = false;
+            Response.ClearContent();
+            Response.ClearHeaders();
+
+            Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            stream.Seek(0, SeekOrigin.Begin);
+
+            rd.Close();
+            rd.Dispose();
+
+            return File(stream, "application/pdf", "MenuByCustomer.pdf");
+        }
+
+        public string translateDay(int? day)
+        {
+            switch (day)
+            {
+                case 1 :
+                    return "domingo";
+                case 2:
+                    return "segunda";
+                case 3:
+                    return "terça";
+                case 4:
+                    return "quarta";
+                case 5:
+                    return "quinta";
+                case 6:
+                    return "sexta";
+                case 7:
+                    return "sábado";
+                default:
+                    return "";
+            }
         }
 
     }

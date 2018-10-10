@@ -55,6 +55,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nome" Type="varchar" MaxLength="50" />
+          <Property Name="price" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -247,6 +248,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Int32" Nullable="false" />
           <NavigationProperty Name="MenuProduto" Relationship="CustomerDBModel.FK_MenuProduto_Produto" FromRole="Produto" ToRole="MenuProduto" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -377,6 +379,7 @@
           <EntitySetMapping Name="Produto">
             <EntityTypeMapping TypeName="CustomerDBModel.Produto">
               <MappingFragment StoreEntitySet="Produto">
+                <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>

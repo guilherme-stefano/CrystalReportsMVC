@@ -10,6 +10,7 @@ namespace CrystalReportMVC.ReportsViewModels
 
         public int id { get; set; }
         public string Nome { get; set; }
+        public int price { get; set; }
 
         public virtual ICollection<MenuProdutoReportViewModel> MenuProduto { get; set; }
     }

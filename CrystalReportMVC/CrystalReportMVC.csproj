@@ -183,6 +183,12 @@
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="CrystalReports\ProductByCustomerPriceAnalitic.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductByCustomerPriceAnalitic.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CrystalReports\ReportFromDB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -238,6 +244,7 @@
     <Compile Include="ReportsViewModels\CidadeReportViewModel.cs" />
     <Compile Include="ReportsViewModels\CustomerByMenuFooter.cs" />
     <Compile Include="ReportsViewModels\CustomerByMenuHeader.cs" />
+    <Compile Include="ReportsViewModels\CustomerByMenuProductReportViewModel.cs" />
     <Compile Include="ReportsViewModels\CustomerByMenuViewModel.cs" />
     <Compile Include="ReportsViewModels\CustomerByMenuViewModel2.cs" />
     <Compile Include="ReportsViewModels\CustomerMenuReportViewModel.cs" />
@@ -339,6 +346,10 @@
     <EmbeddedResource Include="CrystalReports\CustomerByMenu.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CustomerByMenu.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrystalReports\ProductByCustomerPriceAnalitic.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ProductByCustomerPriceAnalitic.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="CrystalReports\ReportFromDB.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
