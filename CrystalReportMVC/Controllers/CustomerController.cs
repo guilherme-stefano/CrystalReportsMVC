@@ -65,7 +65,13 @@ namespace CrystalReportMVC.Controllers
         public ActionResult ExportMenuByCustomer2(FilterCustomerViewModel filter)
         {
             List<Customer> allCustomer = new List<Customer>();
-            allCustomer = context.Customer.Where(d => DateTime.Compare(d.created_at, filter.criado_em) > 0).ToList();
+            IQueryable<Customer> query = context.Customer.AsQueryable();
+            if (filter.criado_em != null)
+            {
+                query = context.Customer.Where(d => DateTime.Compare(d.created_at, filter.criado_em ?? DateTime.Now) > 0);
+            }
+            allCustomer = query.ToList();
+
             var customerModel = Mapper.Map<IEnumerable<CustomerReportViewModel>>(allCustomer);
             List<CustomerByMenuViewModel2> customerByMenuReport = new List<CustomerByMenuViewModel2>();
             foreach (var customer in customerModel)

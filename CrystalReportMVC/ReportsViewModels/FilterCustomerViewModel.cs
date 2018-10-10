@@ -7,6 +7,6 @@ namespace CrystalReportMVC.ReportsViewModels
 {
     public class FilterCustomerViewModel
     {
-        public DateTime criado_em { get; set; }
+        public DateTime? criado_em { get; set; }
     }
 }
